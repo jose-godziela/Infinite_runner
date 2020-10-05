@@ -5,8 +5,8 @@ Character::Character()
 {
 	std::cout << "He sido creado" << std::endl;
 	_pos = {NULL,NULL};
-	_mov_key_L = NULL;
-	_mov_key_R = NULL;
+	_mov_key_UP = NULL;
+	_mov_key_DOWN = NULL;
 	_jump_key = NULL;
 	_lives = NULL;
 	_score = NULL;
@@ -26,13 +26,13 @@ void Character::set_jump_key(int jump_key)
 	_jump_key = jump_key;
 }
 
-void Character::set_mov_key_L(int mov_key_L)
+void Character::set_mov_key_UP(int mov_key_UP)
 {
-	_mov_key_L = mov_key_L;
+	_mov_key_UP = mov_key_UP;
 }
-void Character::set_mov_key_R(int mov_key_R)
+void Character::set_mov_key_DOWN(int mov_key_DOWN)
 {
-	_mov_key_R = mov_key_R;
+	_mov_key_DOWN = mov_key_DOWN;
 }
 
 void Character::set_rec(Rectangle rec)
@@ -40,11 +40,20 @@ void Character::set_rec(Rectangle rec)
 	_rec = rec;
 }
 
+void Character::move_L()
+{
+
+}
+void Character::move_R()
+{
+
+}
+
 Vector2 Character::get_pos() { return _pos; }
 
-int Character::get_mov_key_L() { return _mov_key_L; }
+int Character::get_mov_key_UP() { return _mov_key_UP; }
 
-int Character::get_mov_key_R() { return _mov_key_R; }
+int Character::get_mov_key_DOWN() { return _mov_key_DOWN; }
 
 int Character::get_jump_key() { return _jump_key; }
 
