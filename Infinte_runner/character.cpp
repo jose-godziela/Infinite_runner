@@ -19,6 +19,8 @@ Character::~Character()
 void Character::set_pos(Vector2 pos)
 {
 	_pos = pos;
+	_rec.x = _pos.x;
+	_rec.y = _pos.y;
 }
 
 void Character::set_jump_key(int jump_key)
@@ -38,15 +40,6 @@ void Character::set_mov_key_DOWN(int mov_key_DOWN)
 void Character::set_rec(Rectangle rec)
 {
 	_rec = rec;
-}
-
-void Character::move_L()
-{
-
-}
-void Character::move_R()
-{
-
 }
 
 Vector2 Character::get_pos() { return _pos; }

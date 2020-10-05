@@ -21,8 +21,6 @@ public:
 	void set_mov_key_UP(int mov_key_UP);//
 	void set_mov_key_DOWN(int mov_key_DOWN);//
 	void set_rec(Rectangle rec);
-	void move_L();
-	void move_R();
 	Vector2 get_pos();//
 	int get_mov_key_UP();
 	int get_mov_key_DOWN();
