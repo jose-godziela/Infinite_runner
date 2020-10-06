@@ -4,7 +4,7 @@
 #include "raylib.h"
 #include "character.h"
 
-#define SCREEN_HEIGHT 720
+#define SCREEN_HEIGHT 800
 #define SCREEN_WIDTH 1080
 
 void game();

@@ -14,12 +14,12 @@ void game()
 
 	Character* p = new Character();
 
-	aux_pos.x = SCREEN_WIDTH / 2;
-	aux_pos.y = SCREEN_HEIGHT / 2;
 	aux_rec.x = 50;
 	aux_rec.y = 50;
 	aux_rec.width = 20;
 	aux_rec.height = 20;
+	aux_pos.x = SCREEN_WIDTH / 2;
+	aux_pos.y = (SCREEN_HEIGHT / 2) + (aux_rec.width / 2) + 5;
 
 	p->set_jump_key(KEY_SPACE);
 	p->set_mov_key_UP(KEY_UP);
@@ -29,8 +29,7 @@ void game()
 	p->set_rec(aux_rec);
 	p->set_pos(aux_pos);
 
-
-	InitWindow(1080, 800, "TEST");
+	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TEST");
 
 	Color* colors = new Color[lane_counter];
 	init_lines(lane_counter, colors);
@@ -40,9 +39,9 @@ void game()
 		//draw
 		BeginDrawing();
 		ClearBackground(BLACK);
-		draw_lanes(lane_counter,lane_height,colors);
-		
-		DrawRectangleRec(p->get_rec(), RED);
+		draw_lanes(lane_counter, lane_height, colors);
+
+		DrawRectangleRec(p->get_rec(), BLACK);
 
 		//update
 		if (IsKeyPressed(p->get_mov_key_UP()))
@@ -72,7 +71,6 @@ void game()
 		}
 		EndDrawing();
 	}
-
 	
 	delete p;
 	delete[] colors;
@@ -82,9 +80,9 @@ void draw_lanes(int lane_counter, int lane_height, Color* colors)
 {
 	for (int i = 0; i < lane_counter; i++)
 	{
-		DrawRectangle(0,i * lane_height,GetScreenWidth(),lane_height,colors[i]);
+		DrawRectangle(0, i * lane_height, GetScreenWidth(), lane_height, colors[i]);
 	}
-	
+
 }
 
 void init_lines(int lane_counter, Color* colors)
