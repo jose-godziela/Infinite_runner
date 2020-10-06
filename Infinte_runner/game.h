@@ -9,12 +9,6 @@
 
 void game();
 
-enum Layer
-{
-	TOP,
-	MIDDLE,
-	BOTTOM
-};
 
 
 #endif

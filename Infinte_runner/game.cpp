@@ -2,10 +2,16 @@
 
 Vector2 aux_pos;
 Rectangle aux_rec;
-Layer current_layer;
+
+void draw_lanes(int lane_counter, int lane_height, Color* colors);
+void init_lines(int lanes_height, Color* colors);
+
 
 void game()
 {
+	int lane_counter = 16;
+	int lane_height = 50;
+
 	Character* p = new Character();
 
 	aux_pos.x = SCREEN_WIDTH / 2;
@@ -24,13 +30,18 @@ void game()
 	p->set_pos(aux_pos);
 
 
-	InitWindow(1080, 720, "TEST");
+	InitWindow(1080, 800, "TEST");
+
+	Color* colors = new Color[lane_counter];
+	init_lines(lane_counter, colors);
 
 	while (!WindowShouldClose())
 	{
+		//draw
 		BeginDrawing();
 		ClearBackground(BLACK);
-		//draw
+		draw_lanes(lane_counter,lane_height,colors);
+		
 		DrawRectangleRec(p->get_rec(), RED);
 
 		//update
@@ -64,8 +75,37 @@ void game()
 
 	
 	delete p;
+	delete[] colors;
 }
 
+void draw_lanes(int lane_counter, int lane_height, Color* colors)
+{
+	for (int i = 0; i < lane_counter; i++)
+	{
+		DrawRectangle(0,i * lane_height,GetScreenWidth(),lane_height,colors[i]);
+	}
+	
+}
 
-
-
+void init_lines(int lane_counter, Color* colors)
+{
+	for (int i = 0; i < lane_counter; i++)
+	{
+		colors[i].a = 255;
+		colors[i].r = GetRandomValue(0, 255);
+		colors[i].g = GetRandomValue(0, 255);
+		colors[i].b = GetRandomValue(0, 255);
+		if (i > 0)
+		{
+			//to avoid having the same colors
+			while (colors[i].r == colors[i - 1].r
+				&& colors[i].g == colors[i - 1].g
+				&& colors[i].b == colors[i - 1].b)
+			{
+				colors[i].r = GetRandomValue(0, 255);
+				colors[i].g = GetRandomValue(0, 255);
+				colors[i].b = GetRandomValue(0, 255);
+			}
+		}
+	}
+}
