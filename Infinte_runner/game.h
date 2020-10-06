@@ -7,4 +7,14 @@
 #define SCREEN_HEIGHT 720
 #define SCREEN_WIDTH 1080
 
+void game();
+
+enum Layer
+{
+	TOP,
+	MIDDLE,
+	BOTTOM
+};
+
+
 #endif

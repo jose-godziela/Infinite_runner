@@ -42,6 +42,21 @@ void Character::set_rec(Rectangle rec)
 	_rec = rec;
 }
 
+void Character::set_mov_key_LEFT(int mov_key_LEFT)
+{
+	_mov_key_left = mov_key_LEFT;
+}
+
+void Character::set_mov_key_RIGHT(int mov_key_RIGHT)
+{
+	_mov_key_right = mov_key_RIGHT;
+}
+
+//void Character::set_layer(Layer layer)
+//{
+//	_layer = layer;
+//}
+
 Vector2 Character::get_pos() { return _pos; }
 
 int Character::get_mov_key_UP() { return _mov_key_UP; }
@@ -51,3 +66,8 @@ int Character::get_mov_key_DOWN() { return _mov_key_DOWN; }
 int Character::get_jump_key() { return _jump_key; }
 
 Rectangle Character::get_rec() { return _rec; }
+
+int Character::get_mov_key_LEFT() { return _mov_key_left; }
+int Character::get_mov_key_RIGHT() { return _mov_key_right; }
+
+//Layer Character::get_layer() { return _layer; }
