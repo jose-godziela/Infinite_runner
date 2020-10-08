@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <list>
+#include <vector>
 #include <iterator>
 #include <iostream>
 
@@ -16,10 +16,14 @@ using namespace std;
 #define FPS 60
 #define MIN_ENEMIES_GENERATED 1
 #define MAX_ENEMIES_GENERATED 5
-
+#define TAM_ENEMIES 200
 
 void game();
 
-
+struct Object_obstacle
+{
+	Obstacle obstacle;
+	bool active;
+};
 
 #endif

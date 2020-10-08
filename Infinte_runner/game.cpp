@@ -5,11 +5,13 @@ Rectangle aux_rec;
 
 void draw_lanes(int lane_counter, int lane_height, Color* colors);
 void init_lines(int lanes_height, Color* colors);
-void generate_enemy(int random_generator, list <Obstacle> &list_obs);
+void generate_enemy(int random_generator, Object_obstacle* arr_obs);
 //aux
 int random_generator, random_time;
 int lane_counter = 16;
 int lane_height = 50;
+int indice = 0;
+
 
 void game()
 {
@@ -36,9 +38,9 @@ void game()
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TEST");
 
 	Color* colors = new Color[lane_counter];
-	list<Obstacle> list_obs;
-	list<Obstacle>::iterator obs_iter;
-	Obstacle obs;
+	//vector<Obstacle> vector_obs;
+	//vector<Obstacle>::iterator obs_iter;
+	Object_obstacle* arr_obs = new Object_obstacle[TAM_ENEMIES];
 
 	SetTargetFPS(FPS);
 
@@ -61,34 +63,25 @@ void game()
 		{
 			random_time = GetRandomValue(0, time_generation);
 			random_generator = GetRandomValue(MIN_ENEMIES_GENERATED, MAX_ENEMIES_GENERATED);
-			generate_enemy(random_generator, list_obs);
+			generate_enemy(random_generator,arr_obs);
 		}
-		cout << random_time << endl;
+		//cout << random_time << endl;
 		random_time--;
 
-		//if (list_obs.size() != NULL)
-		//{
-		//	obs = list_obs.front();
-		//
-		//	obs.update();
-		//	if (obs.get_rec().x < 0)
-		//	{
-		//		list_obs.pop_front();
-		//	}
-		//
-		//	DrawRectangleRec(obs.get_rec(), BLACK);
-		//}
-
-		if (list_obs.size() > 0)
+		for (int i = 0; i < TAM_ENEMIES; i++)
 		{
-			for (obs_iter = list_obs.begin(); obs_iter != list_obs.end(); obs_iter++)
+			if (arr_obs[i].active)
 			{
-				obs_iter->update();
-				DrawRectangleRec(obs_iter->get_rec(), WHITE);
+				arr_obs[i].obstacle.update();
+				DrawRectangleRec(arr_obs[i].obstacle.get_rec(), WHITE);
+				if (arr_obs[i].obstacle.get_rec().x < 0)
+				{
+					arr_obs[i].active = false;
+				}
 			}
 		}
 		
-
+		
 		//input
 
 		if (IsKeyPressed(p->get_mov_key_UP()))
@@ -121,6 +114,7 @@ void game()
 		EndDrawing();
 	}
 
+	delete[] arr_obs;
 	delete p;
 	delete[] colors;
 }
@@ -157,9 +151,11 @@ void init_lines(int lane_counter, Color* colors)
 	}
 }
 
-void generate_enemy(int random_generator, list <Obstacle> &list_obs)
+void generate_enemy(int random_generator,Object_obstacle* arr_obs)
 {
+
 	Rectangle rec;
+	std::cout << "GENERO: " << random_generator << endl;
 	for (int i = 0; i < random_generator; i++)
 	{
 		Obstacle obs = Obstacle();
@@ -168,6 +164,17 @@ void generate_enemy(int random_generator, list <Obstacle> &list_obs)
 		rec.y = (GetRandomValue(0,lane_counter) * lane_height) - 30;
 		rec.x = GetScreenWidth() + rec.width;
 		obs.set_rec(rec);
-		list_obs.push_back(obs);
+		//list_obs.push_back(obs);
+		for (int j = 0; j < TAM_ENEMIES; j++)
+		{
+			if (!arr_obs[j].active)
+			{
+				arr_obs[j].obstacle = obs;
+				arr_obs[j].active = true;
+				j = TAM_ENEMIES;
+			}
+
+		}
 	}
 }
+

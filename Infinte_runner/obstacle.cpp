@@ -24,5 +24,4 @@ Rectangle Obstacle::get_rec()
 void Obstacle::update()
 {
 	_rec.x -= _speed;
-	std::cout << "ME MUEVO" << std::endl;
 }
