@@ -13,6 +13,7 @@ Character::Character()
 	_lives = 6;
 	_score = NULL;
 	_rec = {NULL,NULL,NULL,NULL};
+	_alive = true;
 }
 Character::~Character()
 {

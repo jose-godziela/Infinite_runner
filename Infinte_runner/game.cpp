@@ -2,10 +2,11 @@
 
 Vector2 aux_pos;
 Rectangle aux_rec;
-
+Character* p = new Character();
 void draw_lanes(int lane_counter, int lane_height, Color* colors);
 void init_lines(int lanes_height, Color* colors);
 void generate_enemy(int random_generator, Object_obstacle* arr_obs);
+void init();
 //aux
 int random_generator, random_time;
 int lane_counter = 16;
@@ -19,22 +20,8 @@ void game()
 
 	float time_generation = 2 * FPS;
 	window_closed = false;
-	Character* p = new Character();
 
-	aux_rec.x = 50;
-	aux_rec.y = 50;
-	aux_rec.width = 20;
-	aux_rec.height = 20;
-	aux_pos.x = SCREEN_WIDTH / 2;
-	aux_pos.y = (SCREEN_HEIGHT / 2) + (aux_rec.width / 2) + 5;
-
-	p->set_jump_key(KEY_SPACE);
-	p->set_mov_key_UP(KEY_UP);
-	p->set_mov_key_DOWN(KEY_DOWN);
-	p->set_mov_key_LEFT(KEY_LEFT);
-	p->set_mov_key_RIGHT(KEY_RIGHT);
-	p->set_rec(aux_rec);
-	p->set_pos(aux_pos);
+	init();
 
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TEST");
 
@@ -49,13 +36,16 @@ void game()
 
 	random_time = GetRandomValue(0, time_generation);
 
+	init();
+
 	while (!WindowShouldClose() && !window_closed)
 	{
 		//draw
+		BeginDrawing();
+		ClearBackground(BLACK);
+
 		if (p->get_alive())
 		{
-			BeginDrawing();
-			ClearBackground(BLACK);
 
 			draw_lanes(lane_counter, lane_height, colors);
 			DrawRectangleRec(p->get_rec(), BLACK);
@@ -65,7 +55,7 @@ void game()
 			if (random_time <= 0)
 			{
 				random_time = GetRandomValue(0, time_generation);
-				random_generator = GetRandomValue(MIN_ENEMIES_GENERATED, MAX_ENEMIES_GENERATED);
+				random_generator = GetRandomValue(MIN_ENEMIES_GENERATED, MAX_NORMAL_ENEMIES_GENERATED);
 				generate_enemy(random_generator, arr_obs);
 			}
 			random_time--;
@@ -75,7 +65,7 @@ void game()
 				if (arr_obs[i].active)
 				{
 					arr_obs[i].obstacle.update();
-					DrawRectangleRec(arr_obs[i].obstacle.get_rec(), WHITE);
+					DrawRectangleRec(arr_obs[i].obstacle.get_rec(), arr_obs[i].obstacle.get_color());
 					if (arr_obs[i].obstacle.get_rec().x < 0)
 					{
 						arr_obs[i].active = false;
@@ -119,7 +109,7 @@ void game()
 				if (CheckCollisionRecs(p->get_rec(), arr_obs[i].obstacle.get_rec()))
 				{
 					p->set_lives(p->get_lives() - 1);
-					std::cout << p->get_lives() << std::endl;
+
 				}
 			}
 
@@ -128,20 +118,20 @@ void game()
 				p->set_alive(false);
 			}
 
-			EndDrawing();
 		}
 		else
 		{
-			BeginDrawing();
 			ClearBackground(BLACK);
-			DrawText("GAME OVER",GetScreenWidth()/2 - 20,GetScreenHeight() / 2, 20, RED);
+			DrawText("GAME OVER", GetScreenWidth() / 2 - 20, GetScreenHeight() / 2, 20, RED);
+			std::cout << p->get_score() << std::endl;
 			timer++;
 			if (timer >= 180)
 			{
 				window_closed = true;
 			}
-			EndDrawing();
 		}
+		EndDrawing();
+
 	}
 	delete[] arr_obs;
 	delete p;
@@ -182,7 +172,7 @@ void init_lines(int lane_counter, Color* colors)
 
 void generate_enemy(int random_generator, Object_obstacle* arr_obs)
 {
-
+	int agile_enemies = GetRandomValue(0, random_generator);
 	Rectangle rec;
 	std::cout << "GENERO: " << random_generator << endl;
 	for (int i = 0; i < random_generator; i++)
@@ -193,6 +183,31 @@ void generate_enemy(int random_generator, Object_obstacle* arr_obs)
 		rec.y = (GetRandomValue(0, lane_counter) * lane_height) - 30;
 		rec.x = GetScreenWidth() + rec.width;
 		obs.set_rec(rec);
+		obs.set_color(WHITE);
+		//list_obs.push_back(obs);
+		for (int j = 0; j < TAM_ENEMIES; j++)
+		{
+			if (!arr_obs[j].active)
+			{
+				arr_obs[j].obstacle = obs;
+				arr_obs[j].obstacle.set_speed(obs.get_speed());
+				arr_obs[j].active = true;
+				j = TAM_ENEMIES;
+			}
+
+		}
+	}
+	for (int i = 0; i < agile_enemies; i++)
+	{
+		short speed = 15;
+		Agile_obs obs = Agile_obs();
+		rec.width = 10;
+		rec.height = 10;
+		rec.y = (GetRandomValue(0, lane_counter) * lane_height) - 30;
+		rec.x = GetScreenWidth() + rec.width;
+		obs.set_rec(rec);
+		obs.set_speed(speed);
+		obs.set_color(RAYWHITE);
 		//list_obs.push_back(obs);
 		for (int j = 0; j < TAM_ENEMIES; j++)
 		{
@@ -207,3 +222,20 @@ void generate_enemy(int random_generator, Object_obstacle* arr_obs)
 	}
 }
 
+void init()
+{
+	aux_rec.x = 50;
+	aux_rec.y = 50;
+	aux_rec.width = 20;
+	aux_rec.height = 20;
+	aux_pos.x = SCREEN_WIDTH / 2;
+	aux_pos.y = (SCREEN_HEIGHT / 2) + (aux_rec.width / 2) + 5;
+
+	p->set_jump_key(KEY_SPACE);
+	p->set_mov_key_UP(KEY_UP);
+	p->set_mov_key_DOWN(KEY_DOWN);
+	p->set_mov_key_LEFT(KEY_LEFT);
+	p->set_mov_key_RIGHT(KEY_RIGHT);
+	p->set_rec(aux_rec);
+	p->set_pos(aux_pos);
+}

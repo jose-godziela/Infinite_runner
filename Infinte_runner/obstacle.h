@@ -9,10 +9,15 @@ class Obstacle
 private:
 	Rectangle _rec;
 	short _speed;
+	Color _color;
 public:
 	Obstacle();
 	~Obstacle();
+	void set_color(Color color);
 	void set_rec(Rectangle rec);
+	void set_speed(short speed);
+	short get_speed();
+	Color get_color();
 	Rectangle get_rec();
 	void update();
 };
