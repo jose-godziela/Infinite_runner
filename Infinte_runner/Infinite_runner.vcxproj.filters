@@ -1,48 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Archivos de recursos">
+    <Filter Include="Entities">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="screens">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de recursos</Filter>
+    <ClCompile Include="res\entities\agile_obs.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Archivos de recursos</Filter>
+    <ClCompile Include="res\entities\character.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="character.cpp">
-      <Filter>Archivos de recursos</Filter>
+    <ClCompile Include="res\entities\obstacle.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="obstacle.cpp">
-      <Filter>Archivos de recursos</Filter>
+    <ClCompile Include="res\screens\game.cpp">
+      <Filter>screens</Filter>
     </ClCompile>
-    <ClCompile Include="agile_obs.cpp">
-      <Filter>Archivos de recursos</Filter>
-    </ClCompile>
+    <ClCompile Include="res\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="res\entities\agile_obs.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="character.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="res\entities\character.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="obstacle.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="res\entities\obstacle.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="agile_obs.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="res\screens\game.h">
+      <Filter>screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

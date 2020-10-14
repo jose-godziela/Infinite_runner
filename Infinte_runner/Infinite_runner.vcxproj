@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="res\entities\agile_obs.cpp" />
+    <ClCompile Include="res\entities\character.cpp" />
+    <ClCompile Include="res\entities\obstacle.cpp" />
+    <ClCompile Include="res\main.cpp" />
+    <ClCompile Include="res\screens\game.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="res\entities\agile_obs.h" />
+    <ClInclude Include="res\entities\character.h" />
+    <ClInclude Include="res\entities\obstacle.h" />
+    <ClInclude Include="res\screens\game.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -88,7 +101,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\Raylib\include;$(SolutionDir)res\entities;$(SolutionDir)res\screens;$(SolutionDir)res;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\Raylib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\Raylib\include;$(SolutionDir)res\entities;$(SolutionDir)res\screens;$(SolutionDir)res;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,19 +157,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="agile_obs.cpp" />
-    <ClCompile Include="character.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="obstacle.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="agile_obs.h" />
-    <ClInclude Include="character.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="obstacle.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
